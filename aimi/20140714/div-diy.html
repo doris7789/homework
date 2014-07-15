@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+<meta charset="UTF-8">
+<title>改变div的大小和颜色</title>
+<style type="text/css">
+    div {
+        width: 200px;
+        height: 100px;
+        background: #EEEEEE;
+        font-size: 12px;
+        font-weight: bold;
+        color: firebrick;
+    }
+</style>
+<script type="text/javascript" src="http://yinshule123.z01.23dns.net/angular.js"></script>
+</head>
+<body>
+<section ng-app>
+    请输入div的颜色（red/orange/yellow/green/cyan/blue/violet）：<input type="text" ng-model="color" /><br />
+    请输入div的宽度：<input type="text" ng-model="w" /><br />
+    请输入div的高度：<input type="text" ng-model="h" /><br />
+    请输入您想要在div中显示的文字：<input type="text" ng-model="words" /><br />
+    <div style="width: {{w}}px; height: {{h}}px; background-color: {{color}};">{{words}}</div>
+</section>
+</body>
+</html>
