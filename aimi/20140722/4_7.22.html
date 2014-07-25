@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cn" ng-app="menu">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<!--link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css"-->
+<link rel="stylesheet" href="bootstrap.min.css">
+<style type="text/css">
+.done-true {
+    text-decoration: line-through;
+    color: #808080;
+}
+</style>
+<script src="http://yinshule123.z01.23dns.net/angular.js"></script>
+<script type="text/javascript">
+angular.module('menu',[])
+        .controller('menuController', ['$scope', function($scope) {
+            $scope.menus = [
+                {text:'沙发', done:true},
+                {text:'板凳', done:false}
+            ];
+            $scope.addmenu = function() {
+                $scope.menus.push({text:$scope.menuText, done:false});
+                $scope.menuText = '';
+            };
+
+            $scope.remaining = function() {
+                var num = 0;
+                angular.forEach($scope.menus, function(menu) {
+                    num += menu.done ? 0 : 1;
+                });
+                return num;
+            };
+
+            $scope.archive = function() {
+                var oldmenus = $scope.menus;
+                $scope.menus = [];
+                angular.forEach(oldmenus, function(menu) {
+                    if ( !menu.done ) {
+                        $scope.menus.push(menu);
+                    };
+                });
+            };
+        }]);
+</script>
+</head>
+<body>
+<p style="font-weight: bold; font-size: 24px;">菜单</p>
+<div ng-controller="menuController">
+    <!--span>1 of 3 剩余</span-->
+    <span>{{remaining}} of {{menus.length}} 剩余</span>
+    <ul class="unstyled">
+        <li ng-repeat="menu in menus">
+            <input type="checkbox" ng-model="menu.done" />
+            <span class="done-{{menu.done}}">{{menu.text}}</span>
+        </li>
+    </ul>
+    <form ng-submit="addmenu()">
+        <input type="text" size="20" placeholder="点击此处添加新的菜单项目" ng-model="menuText"  />
+        <input type="submit" value="添加" class="btn-primary" />
+    </form>
+</div>
+</body>
+</html>

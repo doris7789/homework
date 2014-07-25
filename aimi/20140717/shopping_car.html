@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+</head>
+<body ng-app>
+
+    <div ng-controller="cartController" class="container">
+        <table ng-show="cart.length" class="table">
+            <thead>
+                <tr>
+                    <th>产品编号</th>
+                    <th>产品名称</th>
+                    <th>购买数量</th>
+                    <th>产品单价</th>
+                    <th>产品总价</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in cart">
+                    <td ng-bind="item.proid">正在加载</td>
+                    <td ng-bind="item.proname">正在加载</td>
+                    <td>
+                        <button type="button" ng-click="minus(item.proid)" class="btn btn-primary">-</button>
+                        <input type="text" ng-model="item.quantity" />
+                        <button type="button" ng-click="add(item.proid)" class="btn btn-primary">+</button>
+                    </td>
+                    <td ng-bind="item.price">正在加载</td>
+                    <td ng-bind="item.quantity * item.price">正在加载</td>
+                    <td><button type="button" ng-click="remove(item.proid)" class="btn btn-danger">移除</button></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>总购买数：</td>
+                    <td ng-bind="totalQuantity()">正在加载</td>
+                    <td>总价：</td>
+                    <td ng-bind="totalPrice()">正在加载</td>
+                    <td><button type="button" ng-click="cart=null" class="btn btn-danger">清空购物车</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <p ng-show="!cart.length">您的购物车中没有商品！</p>
+    </div>
+
+<script type="text/javascript">
+/**
+ * Created by Administrator on 2014/6/20.
+ */
+
+var cartController = function($scope) {
+    $scope.cart = [
+        {
+            proid: "001",
+            proname: "iPhone5s",
+            quantity: 3,
+            price: 4300
+        },
+        {
+            proid: "002",
+            proname: "iPhone5",
+            quantity: 5,
+            price: 4400
+        },
+        {
+            proid: "003",
+            proname: "Mac",
+            quantity: 1,
+            price: 23000
+        },
+        {
+            proid: "004",
+            proname: "iPad",
+            quantity: 2,
+            price: 5900
+        }
+    ];
+
+    $scope.totalPrice = function() {
+        var total = 0;
+        angular.forEach($scope.cart,function(item) {
+            total += parseInt(item.quantity) * item.price;
+        });
+        return total;
+    };
+
+    $scope.totalQuantity = function() {
+        var total = 0;
+        angular.forEach($scope.cart,function(item) {
+            total += parseInt(item.quantity);
+        });
+        return total;
+    };
+
+    var findIndex = function(proid) {
+        var index = -1;
+        angular.forEach($scope.cart,function(item,key) {
+            if ( item.proid == proid ) {
+                index = key;
+            }
+        });
+        return index;
+    };
+
+    $scope.add = function(proid) {
+        var index = findIndex(proid);
+        if ( index != -1 ) {
+            ++ $scope.cart[index].quantity;
+        }
+    };
+
+    $scope.minus = function(proid) {
+        var index = findIndex(proid);
+        if ( index != -1 ) {
+            var item = $scope.cart[index];
+            if ( item.quantity > 1 ) {
+                --item.quantity;
+            } else {
+                var returnKey = confirm("确定要从购物车内删除该产品？");
+                if ( returnKey ) {
+                    $scope.remove(proid);
+                }
+            }
+        }
+    };
+
+    $scope.remove = function(proid) {
+        var index = findIndex(proid);
+        if ( index != -1 ) {
+            $scope.cart.splice(index,1);
+        }
+    };
+
+    $scope.$watch("cart",function(newValue,oldValue){
+        angular.forEach(newValue,function(item,key){
+            if ( item.quantity < 1 ) {
+                var returnKey = confirm("确定要从购物车内删除该产品？");
+                if ( returnKey ) {
+                    $scope.remove(item.proid);
+                } else {
+                    item.quantity = oldValue[key].quantity;
+                }
+                return ;
+            }
+        });
+    },true);
+};
+</script>
+<script type="text/javascript" src="http://yinshule123.z01.23dns.net/angular.js"></script>
+</body>
+</html>
