@@ -1,0 +1,59 @@
+@import "function.less";
+
+body{
+
+  [idName = title]{
+    .flex();
+    .horizontal();
+    margin: 10px 0;
+    [idName = titleCenter]{
+      width:740px;
+      font-size:30px;
+      [idName = titleBtn]{
+        color:#ff7800;
+      }
+      [idName = more]{
+        color:#0f820c;
+        font-size:18px;
+      }
+    }
+  }
+  [idName = box]{
+    .flex();
+    height:600px;
+    .horizontal();
+    [idName = boxCenter]{
+      width:740px;
+      .imgBox{
+        width:160px;
+        margin: 0 20px 20px 0;
+        float:left;
+        font-size:12px;
+        color:#c0c0c0;
+        span{
+          margin:0 2px;
+          line-height: 25px;
+          &.title{
+            color:#0f820c;
+          }
+          &.singer{
+            color:#515151;
+          }
+          &.triangle{
+            width:0px;
+            height:0px;
+            border-bottom:8px solid transparent;
+            border-top:8px solid transparent;
+            border-left:8px solid #c0c0c0;
+            font-size:0px;
+            line-height:0px;
+          }
+          &.time{
+            float:right;
+          }
+        }
+      }
+    }
+  }
+
+}
