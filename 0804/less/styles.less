@@ -1,10 +1,11 @@
 @import "function.less";
 
 body{
-
-  [idName = title]{
+  section{
     .flex();
     .horizontal();
+  }
+  [idName = title]{
     margin: 10px 0;
     [idName = titleCenter]{
       width:740px;
@@ -19,9 +20,6 @@ body{
     }
   }
   [idName = box]{
-    .flex();
-    height:600px;
-    .horizontal();
     [idName = boxCenter]{
       width:740px;
       .imgBox{
@@ -55,5 +53,91 @@ body{
       }
     }
   }
-
+  [idName = homework2]{
+    [idName = homework2Center]{
+      width: 980px;
+      border:1px solid #b1b1b1;
+      display:inline-flex;
+      flex-flow:row;
+      -webkit-flex-flow:row;
+      padding: 10px;
+      .titleForAll{
+        .title{
+          margin: 10px;
+          font-size: 20px;
+        }
+        .more{
+          float:right;
+          font-size: 14px;
+          color:#b0b0b0;
+        }
+      }
+      .large{
+        width: 695px;
+        .pics{
+          margin: 10px;
+          display:inline-flex;
+          flex-flow:row;
+          -webkit-flex-flow:row;
+          .theSame{
+            -moz-box-flex:1;
+            -webkit-box-flex:1;
+            box-flex:1;
+            .imgTitle{
+              width: 318px;
+              color:white;
+              background-color: #363b49;
+              line-height: 40px;
+            }
+          }
+          .papers{
+            margin-left: 15px;
+            .title{
+              font-size: 18px;
+              line-height: 35px;
+            }
+            .others{
+              font-size: 12px;
+              line-height: 25px;
+              span{
+                color:#999999;
+              }
+            }
+            .border{
+              border-bottom: 1px dashed #b1b1b1;
+            }
+          }
+        }
+      }
+      .small{
+        -moz-box-flex:1;
+        -webkit-box-flex:1;
+        box-flex:1;
+        .pics{
+          display:inline-flex;
+          flex-flow:row;
+          -webkit-flex-flow:row;
+          .theSame{
+            padding: 10px;
+            img{
+              border:1px solid #b1b1b1;
+              padding: 5px;
+            }
+            div{
+              font-size: 13px;
+            }
+          }
+        }
+        .others{
+          border-top: 1px dashed #b1b1b1;
+          padding-top: 10px;
+          font-size: 15px;
+          line-height: 20px;
+          .remen{
+            color:#999999;
+          }
+        }
+      }
+    }
+  }
 }
