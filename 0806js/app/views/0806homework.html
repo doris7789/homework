@@ -1,0 +1,5 @@
+<div style="text-align: center">
+   <div><button ng-click="stop()" ng-disabled="!isAutomatic">手动</button><button ng-click="automatic()" ng-disabled="isAutomatic">自动</button></div>
+   <div><button ng-click="leftBtn()"><</button><img ng-src="{{picSrc}}"><button ng-click="rightBtn()">></button></div>
+   <div>{{picIndex}}/{{picTotal}}</div>
+</div>
